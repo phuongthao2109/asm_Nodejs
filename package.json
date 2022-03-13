@@ -20,7 +20,11 @@
   "homepage": "https://github.com/phuongthao2109/asm_Nodejs#readme",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "method-override": "^3.0.0",
+    "mongoose": "^6.2.6",
+    "mongoose-delete": "^0.5.4",
+    "mongoose-slug-generator": "^1.0.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.6",
