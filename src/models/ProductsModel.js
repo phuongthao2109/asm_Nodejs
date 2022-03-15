@@ -2,9 +2,10 @@
 import mongoose from "mongoose";
 import slug from "mongoose-slug-generator";
 const Schema = mongoose.Schema;
+
 const Product = new Schema({
-   name: {type: String,maxLength:255,required:true},
-   desc: {type: String,maxLength:600},
+   name: {type: String,maxLength:255,required:true,minLength:5},
+   desc: {type: String,maxLength:600,minLength:5},
    image: {type: String,maxLength:255},
    slug : {type: String,slug:'name',unique:true},
  },{timestamps: true});
