@@ -1,27 +1,15 @@
 import User from "../models/UsersModel";
-import { generateToken } from "../middleware/accestoken";
+//import { generateToken } from "../middleware/accestoken";
 
-export const Register = async (req, res) => {
+export const Register = async (req, res,next) => {
     try {
         const { email, fullname, password } = req.body;
-        const exist = await User.findOne({ email }).exec();
-        if (exist) {
-            return res.status(400).send("Email already exists");
-        }
-
-        const user = await new User({ email, fullname, password }).save();
-
-        const accessToken = generateToken({ _id: user._id });
-        res.status(201).json({
-            accessToken,
-            user: {
-                _id: user._id,
-                email: user.email,
-                fullname: user.fullname,
-                firstName: user.firstName,
-                lastName: user.lastName,
-            },
-        });
+        // const exist = await User.findOne({ email }).exec();
+        // if (exist) {
+        //     return res.status(400).send("Email already exists");
+        // }
+        const user = await new User({ email, fullname, password }).save()
+            .then((data) => res.json(data));
     } catch (error) {
         res.status(400).send("User created failed");
     }

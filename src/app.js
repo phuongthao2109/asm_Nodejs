@@ -1,6 +1,5 @@
 import express from 'express';
 import cors from 'cors';
-import productRoute from './routes/products';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
 import methodOverride from 'method-override';

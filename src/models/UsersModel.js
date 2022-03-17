@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema(
       firstName: { type: String },
       lastName: { type: String },
       phoneNumber: { type: String, trim: true, maxlength: 20 },
-      address: {type: String},
+      address: { type: String },
       role: { type: Number, default: 0 }
    },
    { timestamps: true }

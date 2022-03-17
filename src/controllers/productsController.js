@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import Product from "../models/ProductsModel";
-
+// import Category from "../models/CategoryModel";
 
 export const list = async (req, res) => {
    try {
@@ -33,7 +33,12 @@ export const remove = async (req, res, next) => {
       .then((data) => res.json(data))
       .catch(next)
 }
+
 export const update = (req, res) => {
    const result = data.map(item => item.id == req.params.id ? req.body : item)
    res.json(result);
 }
+
+// export const ProductByCate = (req, res) => {
+
+// }
