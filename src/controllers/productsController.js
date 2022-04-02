@@ -1,19 +1,22 @@
 import mongoose from 'mongoose';
 import Product from "../models/ProductsModel";
-// import Category from "../models/CategoryModel";
+import Comment from "../models/CommentsModel";
 
 export const list = async (req, res) => {
    try {
-      const product = await Product.find({});
-      res.json(product);
+      const products = await Product.find({}).populate("category").exec();
+      return res.status(200).json(products);
    } catch (error) {
-      console.log(error)
+      return res.status(400).json({
+         error: "Tìm sản phẩm thất bại",
+      });
    }
-}
-export const create = async (req, res) => {
+};
+
+export const createPro = async (req, res) => {
    try {
       const product = await new Product(req.body).save()
-         .then((data) => res.json(data));
+         return res.status(200).json(product);
    } catch (error) {
       console.log(error)
    }
@@ -21,24 +24,52 @@ export const create = async (req, res) => {
 }
 export const getDetail = async (req, res) => {
    try {
-      const product = await Product.findOne({ slug: req.params.slug }).exec()
-         .then((data) => res.json(data))
-
+      const product = await Product.findOne({ _id: req.params.id }).populate("category").exec();
+      return res.status(200).json(product);
    } catch (error) {
-      console.log(error)
+      res.status(400).json({
+         error: `cant find product cuz ${error}`
+      })
+   }
+}
+
+export const getDetailBySlug = async (req, res) => {
+   try {
+      const product = await Product.findOne({ slug: req.params.slug }).populate("category").exec();
+      return res.status(200).json(product);
+   } catch (error) {
+      return res.json(400).send({
+         error: "Tìm sản phẩm thất bại",
+      });
    }
 }
 export const remove = async (req, res, next) => {
-   const product = await Product.delete({ _id: req.params.id })
+   const product = await Product.deleteOne({ _id: req.params.id })
       .then((data) => res.json(data))
       .catch(next)
 }
 
-export const update = (req, res) => {
-   const result = data.map(item => item.id == req.params.id ? req.body : item)
-   res.json(result);
+export const update = async (req, res) => {
+   const condition = { _id: req.params.id }
+   const update = req.body;
+   try {
+      const product = await Product.findOneAndUpdate(condition, update).exec();
+      res.json(product);
+   } catch (error) {
+      res.status(400).json({
+         error: "update sản phẩm không thành công"
+      })
+   }
 }
 
-// export const ProductByCate = (req, res) => {
+export const getReleases = async (req, res) => {
+   try {
+      const product = await Product.find({createdAt})
+   } catch (error) {
+      
+   }
+}
 
-// }
+export const getProByCmt = async (req, res) => {
+   
+}

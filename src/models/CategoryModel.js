@@ -4,11 +4,16 @@ import slug from "mongoose-slug-generator";
 const Schema = mongoose.Schema;
 
 const Category = new Schema({
-   name: {type: String,maxLength:255,required:true,minLength:5},
-   slug : {type: String,slug:'name',unique:true},
- },{timestamps: true});
+  name_cate: { type: String, required: true },
+  slug: { type: String, slug: 'name_cate', unique: true },
+  status: { type: String },
+  description: { type: String },
+  short_description: { type: String },
+  url: { type: String },
+  image: { type: String }
+}, { timestamps: true });
 
 
- mongoose.plugin(slug);
- 
+mongoose.plugin(slug);
+
 module.exports = mongoose.model('Category', Category)

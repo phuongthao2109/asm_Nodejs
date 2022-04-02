@@ -1,43 +1,35 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import { createHmac } from "crypto";
+import { v4 as uuidv4 } from 'uuid';
+const userSchema = new Schema({
+   email: { type: String, required: true, unique: true },
+   password: { type: String, required: true },
+   name_user: { type: String, required: true, maxlength: 100 },
+   phoneNumber: { type: String, maxlength: 20 },
+   address: { type: String },
+   desc: { type:String},
+   role: { type: String, default: 'user'},
+   salt: { type: String }
 
-const userSchema = new mongoose.Schema(
-   {
-      email: { type: String, trim: true, required: true, unique: true },
-      password: { type: String, required: true },
-      fullname: { type: String, trim: true, required: true, maxlength: 100 },
-      firstName: { type: String },
-      lastName: { type: String },
-      phoneNumber: { type: String, trim: true, maxlength: 20 },
-      address: { type: String },
-      role: { type: Number, default: 0 }
-   },
-   { timestamps: true }
-);
+}, { timestamps: true });
 
-userSchema.methods = {
-   getFirstName(fullname) {
-      const nameArr = fullname.split(" ");
-      return nameArr[nameArr.length - 1];
-   },
-   getLastName(fullname) {
-      const nameArr = fullname.split(" ");
-      nameArr.pop();
-      return nameArr.join(" ");
-   },
-};
-
-userSchema.pre("save", async function save(next) {
-   try {
-
-      this.password = this.encrytPassword(this.password);
-      this.firstName = this.getFirstName(this.fullname);
-      this.lastName = this.getLastName(this.fullname);
-      this.address = this.setAddress(this.password);
-      return next();
-   } catch (err) {
-      return next(err);
-   }
+userSchema.pre("save", function (next) {
+   this.salt = uuidv4()
+   this.password = this.encryptPassword(this.password)
+   next();
 });
 
+userSchema.methods = {
+   authenticate(password) {
+      return this.password === this.encryptPassword(password)
+   },
+   encryptPassword(password) {
+      if (!password) return
+      try {
+         return createHmac("sha256", this.salt).update(password).digest("hex");
+      } catch (error) {
+         console.log(error);
+      }
+   }
+}
 export default mongoose.model("User", userSchema);
