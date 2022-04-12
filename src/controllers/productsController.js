@@ -65,4 +65,23 @@ export const update = async (req, res) => {
       })
    }
 }
-
+export const sorfDeleteOrder = async (req, res, next) => {
+   try {
+      const product = await Product.delete({ _id: req.params.id }).exec();
+      return res.status(200).json(product);
+   } catch (error) {
+      return res.status(400).json({
+         error: "Xoá sản phẩm  thất bại",
+      });
+   }
+}
+export const restoreProduct = async (req, res) => {
+   try {
+      const product = await Product.restore({ _id: req.params.id }).exec();
+      return res.status(200).json(product);
+   } catch (error) {
+      return res.status(400).json({
+         error: "Restore sản phẩm thất bại",
+      });
+   }
+}

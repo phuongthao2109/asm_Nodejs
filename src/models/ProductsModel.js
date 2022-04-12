@@ -22,4 +22,4 @@ const Product = new Schema({
 mongoose.plugin(slug);
 Product.plugin(mongooseDelete, { deletedAt: true, overrideMethods: 'all' });
 
-module.exports = mongoose.model('Product', Product)
+module.exports = mongoose.model('Product', Product) 
