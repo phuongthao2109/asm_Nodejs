@@ -4,8 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./src/app.js --exec babel-node -e js"
+    "start": "node --exec babel-node ./src/app.js -e js",
+    "dev": "nodemon --exec babel-node ./src/app.js -e js"
   },
   "repository": {
     "type": "git",
@@ -19,8 +19,10 @@
   },
   "homepage": "https://github.com/phuongthao2109/asm_Nodejs#readme",
   "dependencies": {
+    "cloudinary": "^1.29.0",
     "cors": "^2.8.5",
     "crypto-js": "^4.1.1",
+    "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "express-jwt": "^6.1.1",
     "express-react-views": "^0.11.0",

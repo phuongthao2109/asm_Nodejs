@@ -10,7 +10,7 @@ const Category = new Schema({
   description: { type: String },
   short_description: { type: String },
   url: { type: String },
-  image: { type: String }
+  image: { type: Object }
 }, { timestamps: true });
 
 

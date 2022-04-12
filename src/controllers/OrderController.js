@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
 import Order from '../models/Order';
+import User from "../models/UsersModel";
 import shortid from "shortid";
 
 export const createOrder = async (req, res) => {
    try {
-      const { orderedBy, shippingInfo, orderProducts, orderStatus, orderTotal, orderTotalAfterDiscount } = req.body;
-
+      const { orderedBy, shippingInfo, orderProducts, orderStatus, orderTotal } = req.body;
       const payload = {
          orderCode: shortid.generate(),
          orderedBy,
@@ -13,7 +13,6 @@ export const createOrder = async (req, res) => {
          orderProducts,
          orderStatus,
          orderTotal,
-         orderTotalAfterDiscount,
       };
 
       const order = await new Order(payload).save();
@@ -32,7 +31,7 @@ export const findAllOrder = async (req, res) => {
       return res.status(200).json(orders);
    } catch (error) {
       return res.status(400).json({
-         error: "Tìm đơn hàng thất bại",
+         error: "Load Order List Fail ",
       });
    }
 };

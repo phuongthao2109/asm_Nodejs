@@ -4,12 +4,13 @@ import { v4 as uuidv4 } from 'uuid';
 const userSchema = new Schema({
    email: { type: String, required: true, unique: true },
    password: { type: String, required: true },
-   name_user: { type: String, required: true, maxlength: 100 },
+   username: { type: String, required: true, maxlength: 100 },
    phoneNumber: { type: String, maxlength: 20 },
    address: { type: String },
    desc: { type:String},
    role: { type: String, default: 'user'},
-   salt: { type: String }
+   salt: { type: String },
+   image: { type: Object}
 
 }, { timestamps: true });
 

@@ -1,6 +1,8 @@
 import { Router } from 'express';
-import {createOrder,findAllOrder} from "../controllers/OrderController"
+import {findAllOrder} from "../controllers/OrderController"
 const router = Router();
-router.post('/orders', createOrder)
+// router.post('/cart', createOrder)
+// router.get('/cart/:id', userFindOrderList)
+
 router.get('/orders', findAllOrder)
 export default router;

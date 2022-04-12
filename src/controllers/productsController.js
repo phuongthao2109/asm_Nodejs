@@ -4,7 +4,7 @@ import Comment from "../models/CommentsModel";
 
 export const list = async (req, res) => {
    try {
-      const products = await Product.find({}).populate("category").exec();
+      const products = await Product.find({ deleted: false }).populate("category").exec();
       return res.status(200).json(products);
    } catch (error) {
       return res.status(400).json({
@@ -15,16 +15,20 @@ export const list = async (req, res) => {
 
 export const createPro = async (req, res) => {
    try {
-      const product = await new Product(req.body).save()
-         return res.status(200).json(product);
+      const saveProduct = await new Product(req.body).save();
+      const product = await saveProduct.populate("category");
+      res.json(product);
    } catch (error) {
-      console.log(error)
+      res.status(400).json({
+         message: error.message,
+      })
    }
 
 }
 export const getDetail = async (req, res) => {
    try {
       const product = await Product.findOne({ _id: req.params.id }).populate("category").exec();
+
       return res.status(200).json(product);
    } catch (error) {
       res.status(400).json({
@@ -62,14 +66,3 @@ export const update = async (req, res) => {
    }
 }
 
-export const getReleases = async (req, res) => {
-   try {
-      const product = await Product.find({createdAt})
-   } catch (error) {
-      
-   }
-}
-
-export const getProByCmt = async (req, res) => {
-   
-}
