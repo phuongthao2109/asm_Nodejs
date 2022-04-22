@@ -4,7 +4,7 @@ import Comment from "../models/CommentsModel";
 
 export const list = async (req, res) => {
    try {
-      const products = await Product.find({ deleted: false }).populate("category").exec();
+      const products = await Product.find().populate("category").exec();
       return res.status(200).json(products);
    } catch (error) {
       return res.status(400).json({

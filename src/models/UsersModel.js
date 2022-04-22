@@ -7,10 +7,12 @@ const userSchema = new Schema({
    username: { type: String, required: true, maxlength: 100 },
    phoneNumber: { type: String, maxlength: 20 },
    address: { type: String },
-   desc: { type:String},
-   role: { type: String, default: 'user'},
+   desc: { type: String },
+   role: { type: String, default: 'user' },
    salt: { type: String },
-   image: { type: Object}
+   image: {
+      type: Object,
+    }
 
 }, { timestamps: true });
 

@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const { ObjectId } = mongoose.Types;
 
 const Slider = new Schema({
-   name: { type: String, },
+   slidername: { type: String, },
    image: { type: Object},
    urlink: { type: String, },
 }, { timestamps: true });

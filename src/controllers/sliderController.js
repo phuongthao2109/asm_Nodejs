@@ -19,3 +19,13 @@ export const listSlider = async (req, res, next) => {
       return res.json({ message: `BE:${error.message}` });
    }
 }
+
+export const removeSlider = async (req, res, next) => {
+   try {
+       const slider = await Slider.deleteOne({ _id: req.params.id })
+           .then((data) => res.json(data))
+           .catch(next)
+   } catch (error) {
+       res.status(400).send(`Delete failed ${error.message}`);
+   }
+}

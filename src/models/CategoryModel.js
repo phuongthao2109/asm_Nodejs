@@ -4,8 +4,8 @@ import slug from "mongoose-slug-generator";
 const Schema = mongoose.Schema;
 
 const Category = new Schema({
-  name_cate: { type: String, required: true },
-  slug: { type: String, slug: 'name_cate', unique: true },
+  catename: { type: String, required: true },
+  slug: { type: String, slug: 'catename', unique: true },
   status: { type: String },
   description: { type: String },
   short_description: { type: String },

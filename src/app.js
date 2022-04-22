@@ -12,7 +12,8 @@ import productRoute from "./routes/products"
 import cateRoute from "./routes/category"
 import cartRoute from "./routes/cart"
 import commentRoute from "./routes/comment"
-import sliderRoute from "./routes/slider"
+import sliderRoute from "./routes/slider";
+
 const app = express();
 // middleware
 const corsOptions = {
@@ -20,11 +21,10 @@ const corsOptions = {
     credentials: true,            //access-control-allow-credentials:true
     optionSuccessStatus: 200
 };
-
+require('dotenv').config()
 app.use(cors(corsOptions));
 app.use(morgan('tiny'))
 app.use(express.json({ limit: "50mb" }))
-dotenv.config({ path: __dirname + "/configs/.env" });
 
 // routes
 

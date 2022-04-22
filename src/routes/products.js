@@ -6,8 +6,8 @@ const router = Router();
 
 router.delete('/products/:id', remove);
 router.patch('/products/:id', update);
-router.post('/products', isAuth, isExist, isAdmin, createPro);
-router.get('/products', isAuth, isExist, isAdmin, list);
+router.post('/products',  createPro);
+router.get('/products', list);
 router.get('/products/:slug', getDetailBySlug);
 router.get('/products/:id/edit', getDetail);
 export default router;
