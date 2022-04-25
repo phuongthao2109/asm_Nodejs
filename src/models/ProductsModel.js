@@ -20,6 +20,6 @@ const Product = new Schema({
 
 
 mongoose.plugin(slug);
-Product.plugin(mongooseDelete, { deletedAt: true, overrideMethods: 'all' });
+Product.plugin(mongooseDelete, { deletedAt: true});
 
 module.exports = mongoose.model('Product', Product) 

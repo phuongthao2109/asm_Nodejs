@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const cartSchema = mongoose.Schema(
     {
-        products: [
+        orderProducts: [
             {
                 product: {
                     type: mongoose.Schema.Types.ObjectId,
@@ -12,7 +12,7 @@ const cartSchema = mongoose.Schema(
                 totalPrice: Number,
             },
         ],  
-        cartTotal: Number,
+        cartTotal: Number,  
         orderedBy: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",

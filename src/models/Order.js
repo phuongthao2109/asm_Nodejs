@@ -26,7 +26,8 @@ const Order = new Schema({
       enum: ["pending", "confirm", "delivered", "done", "close"],
       default: "pending",
    },
-   orderTotal: Number,
+   // orderTotal: Number,
+   cartTotal: Number,  
    orderTotalAfterDiscount: Number,
 },
    { timestamps: true }

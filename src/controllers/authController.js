@@ -32,7 +32,7 @@ export const Login = async (req, res) => {
         if (user && user.authenticate(req.body.password)) {
             return res.json({
                 message: "Login success",
-                token: generateToken({ id: user._id }, { expiresIn: "10d" }),
+                token: ({ id: user._id }, { expiresIn: "10d" }),
                 user
             });
         }

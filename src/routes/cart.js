@@ -4,6 +4,6 @@ import { addToCart,findAllCartUser,updateCart } from "../controllers/CartControl
 const router = express.Router();
 
 router.post("/cart", addToCart);
-router.get("/cart/:userId", findAllCartUser);
+router.get("/cart/:id", findAllCartUser);
 router.put("/cart/:actionId", updateCart);
 export default router;
